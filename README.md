@@ -16,4 +16,3 @@ TODO:
  - Implement emailing and DM functionalities of the verification command
  - Implement the encypting function for secret talk
  - Find some Richard Stallman quotes
- - Fix circular imports
