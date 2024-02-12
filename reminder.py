@@ -15,6 +15,11 @@ async def event_reminder(bot, event, seconds, announcements):
 
 # checks every 30 minutes for events and creates timers for them
 async def event_check(bot, guild, announcements):
+    '''
+    every half hour, check for ay scheduled events, if there is one or more, run the loop
+    in the loop first check if the scheduled event already has a timer
+    if not add the event ID to scheduled list and setup a timer for that event
+    '''
     while 1:
         if len(guild.scheduled_events) > 0:
             for i in range(len(guild.scheduled_events)):

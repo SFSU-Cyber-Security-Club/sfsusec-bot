@@ -5,14 +5,15 @@ import asyncio
 
 from reminder import event_check
 from quotes import post_quotes
+from verifier import send_email 
 
 # settings
-Token = "Token"
+Token = ""
 # copy channel ID
 announcements_ID = 1
 general_ID = 1
 # copy server ID
-server_ID = 1
+server_ID = 1 
 
 bot = commands.Bot(command_prefix='', intents=discord.Intents.default())
 
@@ -32,7 +33,7 @@ async def on_ready():
     await asyncio.sleep(3)
     print(f"{bot.user} is now running!")
     asyncio.create_task(event_check(bot, guild, announcements))
-    asyncio.create_task(post_quotes(bot, general))
+    asyncio.create_task(post_quotes(general))
 
 # test slash command
 @bot.tree.command(name="test", description="this is a test command to ensure slash commands are working")
@@ -49,10 +50,12 @@ async def verification(interaction: discord.Interaction, email: str):
     - Requests for that code in DMs to confirm Identity
     - Gives "SFSU student" role in server for proof of verification
     '''
-    domain = email[-8:]
-    if domain != "sfsu.edu":
+    if email[-8:] != "sfsu.edu":
         await interaction.response.send_message(f"Not a valid SFSU email", ephemeral=True)
         return
+    dm = await interaction.user.create_dm()
+    await dm.send("Please reply here with the code sent to your email")
+    asyncio.create_task(send_email(email))
     await interaction.response.send_message(f"A code has been sent to {email}, please DM that code for confirmation", ephemeral=True)
 
 # Secret talk
