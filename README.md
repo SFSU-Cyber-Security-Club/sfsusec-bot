@@ -1,9 +1,7 @@
 *NEW*
-- Added the EMAILING & DMING capabilities for the SFSU email authenticator
-- Added Richard Stallman quotes (and increased the time to ONE post per day)
+- Added role-giving ability
 
 TODO:
- - Implement the actual verification process
  - Create an "SFSU student" role
  - Implement the encypting function for secret talk
 
@@ -30,3 +28,4 @@ SETUP:
  - verifier.py
    1. gmail username
    2. gmail password
+   3. SFSUstudent role ID

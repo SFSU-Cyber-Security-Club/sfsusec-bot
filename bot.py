@@ -42,7 +42,7 @@ async def test(interaction: discord.Interaction):
 
 # SFSU Verification
 @bot.tree.command(name="sfsu_verification", description="Gain the \"SFSU student\" role by verifying your valid SFSU email")
-@app_commands.describe(email = "Enter email address")
+@app_commands.describe(email = "Enter email address", ephemeral=True)
 async def verification(interaction: discord.Interaction, email: str): 
     '''
     - Bot will ask for an SFSU email (will reply with a negative response if not SFSU domain)
@@ -56,6 +56,9 @@ async def verification(interaction: discord.Interaction, email: str):
     dm = await interaction.user.create_dm()
     await dm.send("Please reply here with the code sent to your email")
     asyncio.create_task(send_email(email))
+    dm = await interaction.user.create_dm()
+    await dm.send("Please reply here with the code sent to your email")
+    asyncio.create_task(send_email(bot, email))
     await interaction.response.send_message(f"A code has been sent to {email}, please DM that code for confirmation", ephemeral=True)
 
 # Secret talk
