@@ -1,39 +1,26 @@
-**Not Implemented Yet**
+# Official SFSU Cyber Security Club Discord bot
+
 HELP (/help)
- - It brings you to the GitHub page's README
+- It will print the README
 
-VERIFIER (/sfsu_verification: SFSU-email)
- - Input valid SFSU email
- - Recieve a code sent via email
- - Reply to the Bot's DM with the code
- - If correct, you should have the SFSU student role in the server
+VERIFIER (/sfsu-verification :SFSU-email)
+- Input valid SFSU email
+- Recieve a code sent via email
+- Reply to the Bot's DM with the code
+- If correct, you should have the SFSU student role in the server
 
-**Not Implemented Yet**
-SECRET TALK (/secret_talk: secret-message)
- - Input your secret message
- - The Bot will use a XOR function to encrypt it (https://en.wikipedia.org/wiki/XOR_cipher)
- - The Bot will DM you the decryption key to share
- - Replying to the encrypted message with the key will decipher it and show you the true message
+SECRET TALK (/secret-talk :message)
+- Input your secret message
+- The Bot will encrypt it into base64
+- You will get the decryption key to share
+
+DECRYPT TEXT (/decrypt-cipher :cipher :key)
+- Put in the hidden text with the right key to see the message
 
 EVENT REMINDER (automatic)
- - The Bot will check everyday for events
- - For every event, the Bot will start a timer for 5 minutes before the event
- - The reminder will be posted in the announcements chat
+- The Bot will check everyday for events
+- For every event, the Bot will start a timer for 5 minutes before the event
+- The reminder will be posted in the announcements chat
 
 DAILY DOSES OF RICHARD STALLMAN QUOTES (automatic)
- - Posts a random quote from St. IGNUcius of the Church of Emacs everyday
- - IDK Michael wanted this for some reason
-
-SETUP (config.ini):
-> [DEFAULT]
-> token = 
-> server_id = 
-> announcements_id = 
-> general_id = 
-> bot_user = 
-> bot_pwd = 
-
-REMINDERS
- - Role name must be "SFSU student"
- - Quote & event check timers can only be changed via code (lmk if they need changing)
- - There's only enough quotes for like 3 weeks, more will be added
+- Posts a random quote from St. IGNUcius of the Church of Emacs everyday
