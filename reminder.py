@@ -15,7 +15,7 @@ async def event_reminder(event, seconds: int, announcements):
     A timer for an event that will end 5 min before the start time
     '''
     await asyncio.sleep(seconds)
-    await announcements.send(f'@everyone {event.name} is starting in 5 minutes 👏 As a reminder please go to {event.location} 📍 We will see you there 😃')
+    await announcements.send(f'@SFSU student **{event.name}** is starting in **5 minutes** 👏 As a reminder please go to: **{event.location}** 📍 We will see you there 😃')
 
 async def event_check(bot: commands.Bot, server_ID: int, announcements_ID: int):
     '''
