@@ -61,7 +61,7 @@ async def check_code(bot: commands.Bot, server_ID: int, msg: discord.Message):
     print(f'message-{msg.content} : saved-{codes[msg.author.id]}')
     if msg.content == codes[msg.author.id]:
         guild = bot.get_guild(server_ID)
-        role = get(guild.roles, name='fruity')
+        role = get(guild.roles, name='SFSU student')
         member = await guild.fetch_member(msg.author.id)
         await member.add_roles(role)
         await msg.author.send('Success! You have been granted the **SFSU student** role!')

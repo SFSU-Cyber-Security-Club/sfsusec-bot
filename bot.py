@@ -55,8 +55,7 @@ async def verification(interaction: discord.Interaction, email: str):
     - Requests for that code in DMs to confirm Identity
     - Gives 'SFSU student' role in server for proof of verification
     '''
-    #if not email.endswith('@sfsu.edu') or email.endswith('@mail.sfsu.edu'):
-    if not email.endswith('@gmail.com'):
+    if not email.endswith('@sfsu.edu') or email.endswith('@mail.sfsu.edu'):
         await interaction.response.send_message('Not a valid SFSU email', ephemeral=True)
         return
     await interaction.response.defer() # in case sending the email takes more than 3 seconds

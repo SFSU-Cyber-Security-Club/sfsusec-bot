@@ -1,0 +1,21 @@
+Sharing knowledge is the most fundamental act of friendship. Because it is a way you can give something without losing something.
+If the users don't control the program, the program controls the users. With proprietary software, there is always some entity, the "owner" of the program, that controls the program and through it, exercises power over its users. A nonfree program is a yoke, an instrument of unjust power.
+Free software is a matter of liberty, not price. To understand the concept, you should think of 'free' as in 'free speech,' not as in 'free beer'.
+Programming is not a science. Programming is a craft.
+I did write some code in Java once, but that was the island in Indonesia.
+Free software is software that respects your freedom and the social solidarity of your community. So it's free as in freedom.
+Playfully doing something difficult, whether useful or not, that is hacking.
+Value your freedom or you will lose it, teach history. "Don't bother us with politics," respond those who don't want to learn.
+I don't have a problem with someone using their talents to become successful, I just don't think the highest calling is success. Things like freedom and the expansion of knowledge are beyond success, beyond the personal. Personal success is not wrong, but it is limited in importance, and once you have enough of it, it is a shame to keep striving for that, instead of for truth, beauty, or justice.
+If you want to accomplish something in the world, idealism is not enough - you need to choose a method that works to achieve the goal.
+The desire to be rewarded for one's creativity does not justify depriving the world in general of all or part of that creativity.
+I could have made money this way, and perhaps amused myself writing code. But I knew that at the end of my career, I would look back on years of building walls to divide people, and feel I had spent my life making the world a worse place.
+No person, no idea, and no religion deserves to be illegal to insult, not even the Church of Emacs.
+People sometimes ask me if it is a sin in the Church of Emacs to use vi. Using a free version of vi is not a sin; it is a penance. So happy hacking.
+It is hard to write a simple definition of something as varied as hacking, but I think what these activities have in common is playfulness, cleverness, and exploration. Thus, hacking means exploring the limits of what is possible, in a spirit of playful cleverness. Activities that display playful cleverness have 'hack value'.
+GNU, which stands for Gnu's Not Unix, is the name for the complete Unix-compatible software system which I am writing so that I can give it away free to everyone who can use it.
+Creativity can be a social contribution, but only in so far as society is free to use the results.
+Talking about freedom, about ethical issues, about responsibilities as well as convenience, is asking people to think about things they might prefer to ignore, such as whether their conduct is ethical. This can trigger discomfort, and some people may simply close their minds to it. It does not follow that we ought to stop talking about these things.
+I'm trying to change the way people approach knowledge and information in general. I think that to try to own knowledge, to try to control whether people are allowed to use it, or to try to stop other people from sharing it, is sabotage.
+I have met bright students in computer science who have never seen the source code of a large program. They may be good at writing small programs, but they can't begin to learn the different skills of writing large ones if they can't see how others have done it.
+I consider that the Golden Rule requires that if I like a program I must share it with other people who like it. Software sellers want to divide the users and conquer them, making each user agree not to share with others. I refuse to break solidarity with other users in this way.

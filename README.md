@@ -18,7 +18,7 @@ DECRYPT TEXT (/decrypt-cipher :cipher :key)
 - Put in the hidden text with the right key to see the message
 
 EVENT REMINDER (automatic)
-- The Bot will check everyday for events
+- The Bot will check everyday for events (so plan ahead)
 - For every event, the Bot will start a timer for 5 minutes before the event
 - The reminder will be posted in the announcements chat
 

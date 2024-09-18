@@ -19,7 +19,7 @@ async def event_reminder(event, seconds: int, announcements):
 
 async def event_check(bot: commands.Bot, server_ID: int, announcements_ID: int):
     '''
-    - Bot will check for any scheduled events every half hour, if there is one or more, run the loop
+    - Bot will check for any scheduled events everyday (so plan ahead), if there is one or more, run the loop
     - Check if the scheduled event already has a timer
     - If not add the event ID to scheduled list and setup a unique timer 5 min before event
     '''
@@ -39,11 +39,7 @@ async def event_check(bot: commands.Bot, server_ID: int, announcements_ID: int):
                 current = datetime.now()
                 current_formatted = current.strftime(time_format)
                 print(f'The time now is: {current_formatted} | {guild.scheduled_events[i].name} starts at {local_formatted}')
-                time = (
-                    pd.to_datetime(local_formatted)
-                    - pd.to_datetime(current_formatted)
-                    - 300
-                ) # 5 min before the event
+                time = (pd.to_datetime(local_formatted) - pd.to_datetime(current_formatted) - 300) # 5 min before the event
                 print(f'The time diff is: {time} setting up a timer for {time.seconds} seconds')
                 asyncio.create_task(event_reminder(guild.scheduled_events[i], time.seconds, announcements))
                 print('------------------------------------------------------------------------------')
