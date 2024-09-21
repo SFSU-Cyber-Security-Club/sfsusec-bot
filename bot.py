@@ -34,7 +34,7 @@ async def on_ready():
     except Exception as e:
         print(e)
     await asyncio.sleep(3) # ensure variables are properly initialized 
-    print(f'{bot.user} is now running!')
+    print(f'{bot.user} is now running!\n')
     asyncio.create_task(event_check(bot, server_ID, announcements_ID))
     asyncio.create_task(post_quotes(bot, general_ID))
 
@@ -60,10 +60,13 @@ async def verification(interaction: discord.Interaction, email: str):
         return
     await interaction.response.defer() # in case sending the email takes more than 3 seconds
     dm = await interaction.user.create_dm()
-    asyncio.create_task(send_email(email, interaction.user.id, bot_user, bot_pwd))
-    needs_verification[interaction.user.id] = True
-    await dm.send('Please reply here with the code sent to your email')
-    await interaction.followup.send(f'A code has been sent to **{email}**, please DM that code for confirmation', ephemeral=True)
+    err_msg = await send_email(email, interaction.user.id, bot_user, bot_pwd)
+    if err_msg is None:
+        needs_verification[interaction.user.id] = True
+        await dm.send(f'Please reply here with the code sent to **{email}**')
+        await interaction.followup.send(f'A code has been sent to your email, please DM that code for confirmation')
+    else:
+        await interaction.followup.send(f'There was a problem sending the email: {err_msg}')
 
 # checks for code in DMs
 @bot.event
@@ -74,6 +77,8 @@ async def on_message(msg: discord.Message):
         check = await check_code(bot, server_ID, msg) 
         if (check == 0):
             del needs_verification[msg.author.id]
+    else:
+        await msg.author.send('There is no code under your ID right now, please use the /sfsu-verification command here or in the server')
 
 # secret talk
 @bot.tree.command(name='secret-talk', description='Encrypt your message with a key you can share')

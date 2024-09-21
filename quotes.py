@@ -1,4 +1,5 @@
 from discord.ext import commands
+from datetime import datetime, timedelta
 import asyncio
 import random
 
@@ -18,6 +19,11 @@ async def post_quotes(bot: commands.Bot, general_ID: str):
     '''
     general = bot.get_channel(general_ID)
     while 1 and not len(quotes) == 0:
+        now = datetime.now()
+        next_noon = now.replace(hour=12, minute=0, second=0)
+        if now >= next_noon:
+            next_noon += timedelta(days=1)
+        await asyncio.sleep((next_noon - now).total_seconds())
         quote = random.choice(quotes)
         await general.send(f'"{quote.strip()}" - Richard Stallman')
         quotes.remove(quote)

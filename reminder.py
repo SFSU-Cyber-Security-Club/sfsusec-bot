@@ -3,11 +3,10 @@ import pandas as pd
 import pytz
 
 from discord.ext import commands
-from datetime import datetime
+from datetime import datetime, timedelta
 
 time_zone = 'America/Los_Angeles'
 time_format = '%m/%d/%Y - %H:%M:%S'
-event_check_time = 86400 # 1 day
 event_IDs = []
 
 async def event_reminder(event, seconds: int, announcements):
@@ -25,7 +24,11 @@ async def event_check(bot: commands.Bot, server_ID: int, announcements_ID: int):
     '''
     guild = bot.get_guild(server_ID)
     announcements = bot.get_channel(announcements_ID)
-    while 1:
+    while True:
+        now = datetime.now(pytz.timezone(time_zone))
+        midnight = now.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
+        wait_seconds = (midnight - now).total_seconds()
+        await asyncio.sleep(wait_seconds)
         if len(guild.scheduled_events) > 0:
             for i in range(len(guild.scheduled_events)):
                 if guild.scheduled_events[i].id in event_IDs:
@@ -38,9 +41,7 @@ async def event_check(bot: commands.Bot, server_ID: int, announcements_ID: int):
                 local_formatted = local.strftime(time_format)
                 current = datetime.now()
                 current_formatted = current.strftime(time_format)
-                print(f'The time now is: {current_formatted} | {guild.scheduled_events[i].name} starts at {local_formatted}')
-                time = (pd.to_datetime(local_formatted) - pd.to_datetime(current_formatted) - 300) # 5 min before the event
-                print(f'The time diff is: {time} setting up a timer for {time.seconds} seconds')
+                print(f'The time now is: {current_formatted} | {guild.scheduled_events[i].name} starts at {local_formatted}\n')
+                time = (pd.to_datetime(local_formatted) - pd.to_datetime(current_formatted) - pd.Timedelta(seconds=300)) # 5 min before the event
+                print(f'The time diff is: {time} setting up a timer for {time.seconds} seconds\n')
                 asyncio.create_task(event_reminder(guild.scheduled_events[i], time.seconds, announcements))
-                print('------------------------------------------------------------------------------')
-        await asyncio.sleep(event_check_time)

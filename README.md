@@ -1,11 +1,11 @@
 # Official SFSU Cyber Security Club Discord bot
 
 HELP (/help)
-- It will print the README
+- It will print this README
 
 VERIFIER (/sfsu-verification :SFSU-email)
 - Input valid SFSU email
-- Recieve a code sent via email
+- Recieve a code sent via email (check spam aswell)
 - Reply to the Bot's DM with the code
 - If correct, you should have the SFSU student role in the server
 
@@ -18,7 +18,7 @@ DECRYPT TEXT (/decrypt-cipher :cipher :key)
 - Put in the hidden text with the right key to see the message
 
 EVENT REMINDER (automatic)
-- The Bot will check everyday for events (so plan ahead)
+- The Bot will check everymidnight for scheduled events
 - For every event, the Bot will start a timer for 5 minutes before the event
 - The reminder will be posted in the announcements chat
 

@@ -32,8 +32,7 @@ async def send_email(email: str, uid: str, bot_user: str, bot_pwd: str):
     file = open('codes.txt', 'a')
     file.write(f'{uid} : {code}\n')
     message = 'Here is your verification code: ' + code
-    print(f'sending email to {email} with the code: {code}')
-    print('------------------------------------------------------------------------------')
+    print(f'sending email to {email} with the code: {code}\n')
     msg = MIMEMultipart()
     msg['Subject'] = SUBJECT
     msg['From'] = FROM
@@ -46,9 +45,15 @@ async def send_email(email: str, uid: str, bot_user: str, bot_pwd: str):
         server.login(username, password)
         server.sendmail(FROM, TO, msg.as_string())
         server.close()
-        print(f'successfully sent the mail to {email}')
-    except Exception as e:
-        print(f'failed to send email to {email}: {e}')
+        print(f'successfully sent the mail to {email}\n')
+        return None
+    except smtplib.SMTPException as e:
+        if 'Daily user sending limit exceeded' in str(e):
+            err_msg = 'Email sending limit reached for the day'
+        else:
+            err_msg = 'Failed to send email, please contact an Officer about the issue'
+        print(f'failed to send email to {email}: {e}\n')
+        return err_msg
 
 # gets called once someone dms the bot back
 # https://stackoverflow.com/questions/48987006/how-to-make-a-discord-bot-that-gives-roles-in-python
@@ -58,14 +63,25 @@ async def check_code(bot: commands.Bot, server_ID: int, msg: discord.Message):
     - Compare the msg to the UID:code pair for verification
     - If successful give them the SFSU student role in server
     '''
-    print(f'message-{msg.content} : saved-{codes[msg.author.id]}')
-    if msg.content == codes[msg.author.id]:
-        guild = bot.get_guild(server_ID)
-        role = get(guild.roles, name='SFSU student')
-        member = await guild.fetch_member(msg.author.id)
-        await member.add_roles(role)
-        await msg.author.send('Success! You have been granted the **SFSU student** role!')
-        return 0
+    print(f'{msg.author} texted: {msg.content} --- code saved for {msg.author}: {codes[msg.author.id]}\n')
+    if msg.content.strip() == codes[msg.author.id].strip():
+        try: 
+            guild = bot.get_guild(server_ID)
+            role = get(guild.roles, name='SFSU student')
+            member = await guild.fetch_member(msg.author.id)
+            await member.add_roles(role)
+            print(f'successfully granted {msg.author} the SFSU-student role\n')
+            await msg.author.send('Success! You have been granted the **SFSU student** role!')
+            return 0
+        except discord.Forbidden as e:
+            print(f'ERROR: permission error: {e}\n')
+            await msg.author.send('Sorry, I lack the permission to give you this role, please contact an Officer to fix this.')
+            return 1
+        except discord.HTTPException as e:
+            print(f'ERROR: some error: {e}\n')
+            await msg.author.send('Sorry, an error has occured that should not have, please contact an Officer to fix this')
+            return 1
     else:
+        print('the code was incorrect...\n')
         await msg.author.send('Sorry, the code you have sent was not correct...')
         return 1
