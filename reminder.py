@@ -15,7 +15,10 @@ async def event_reminder(event, seconds: int, announcements, role):
     A timer for an event that will end 5 min before the start time
     '''
     await asyncio.sleep(seconds)
-    await announcements.send(f'{role} **{event.name}** is starting in **5 minutes** 👏 As a reminder please go to: **{event.location}** 📍 We will see you there 😃')
+    location =  f'{event.location}'
+    if location == 'None':
+        location = '#ctf-collaboration'
+    await announcements.send(f'{role.mention} **{event.name}** is starting in **5 minutes** 👏 As a reminder please go to: **{event.location}** 📍 We will see you there 😃')
 
 async def event_check(bot: commands.Bot, server_ID: int, announcements_ID: int):
     '''
@@ -29,7 +32,7 @@ async def event_check(bot: commands.Bot, server_ID: int, announcements_ID: int):
     while True:
         now = datetime.now(pytz.timezone(time_zone))
         midnight = now.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
-        await asyncio.sleep((midnight-now).total_seconds)
+        await asyncio.sleep((midnight-now).total_seconds())
         if len(guild.scheduled_events) > 0:
             for i in range(len(guild.scheduled_events)):
                 if guild.scheduled_events[i].id in event_IDs:
@@ -44,5 +47,5 @@ async def event_check(bot: commands.Bot, server_ID: int, announcements_ID: int):
                 current_formatted = current.strftime(time_format)
                 time = (pd.to_datetime(local_formatted)-pd.to_datetime(current_formatted))
                 print(f'The time now is: {current_formatted} | {guild.scheduled_events[i].name} starts at {local_formatted}\n')
-                print(f'The time diff is: {time} setting up a timer for 5min before event: {time.total_seconds-300} seconds\n')
-                asyncio.create_task(event_reminder(guild.scheduled_events[i], time.total_seconds-300, announcements, role))
+                print(f'The time diff is: {time} setting up a timer for 5min before event: {time.total_seconds()-300} seconds\n')
+                asyncio.create_task(event_reminder(guild.scheduled_events[i], time.total_seconds()-300, announcements, role))
